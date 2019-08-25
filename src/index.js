@@ -30,6 +30,7 @@ addEdgeButton.addEventListener('click', function (ev){
     console.log("Event: Add Edge Button Click")
     editor.ExitSelectMode()
     editor.ExitAddNodeMode()
+    editor.EnterAddEdgeMode()
 
 }, false)
 
@@ -43,7 +44,9 @@ dumpButton.addEventListener('click', function (ev){
 }, false)
 
 // ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
+
+
+
 // ---------------------------------------------------------------------------
 
 var updateImageDataButton = document.getElementById("updateimagedata_button")
