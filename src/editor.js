@@ -13,7 +13,109 @@ function getMousePos(canvas, evt) {
 }
 
 // -----------------------------------------------------------------------
- 
+
+
+class EditorMode {
+    constructor() {
+    }
+
+    Enter() {
+    }
+
+    Exit() {
+    }
+
+}
+
+
+class Select_EditorMode extends EditorMode{
+    constructor(canvas) {
+        super()
+        this.canvas = canvas
+
+    }
+
+    Enter() {
+        console.log("EnterSelectMode()")
+        // this.canvas.addEventListener('mouseover', SelectMode_Mouseover_Handler, false)
+        // this.canvas.addEventListener('mousemove', SelectMode_Mousemove_Handler, false)
+        // this.canvas.addEventListener('mousedown', SelectMode_Mousedown_Handler, false)
+        // this.canvas.addEventListener('mouseup', SelectMode_Mouseup_Handler, false)        
+        // this.canvas.addEventListener('mouseout', SelectMode_Mouseout_Handler, false)
+    }
+
+    Exit() {
+        console.log("ExitSelectMode()")
+        // this.canvas.removeEventListener('mouseover', SelectMode_Mouseover_Handler, false)
+        // this.canvas.removeEventListener('mousemove', SelectMode_Mousemove_Handler, false)
+        // this.canvas.removeEventListener('mousedown', SelectMode_Mousedown_Handler, false)
+        // this.canvas.removeEventListener('mouseup', SelectMode_Mouseup_Handler, false)        
+        // this.canvas.removeEventListener('mouseout', SelectMode_Mouseout_Handler, false)
+    }
+
+}
+
+
+class AddNode_EditorMode extends EditorMode{
+    constructor(canvas) {
+        super()
+        this.canvas = canvas
+
+    }
+
+    Enter() {
+        console.log("AddNode_EditorMode.Enter()")
+        this.canvas.addEventListener('mouseover', AddNodeMode_Mouseover_Handler, false)
+        this.canvas.addEventListener('mousemove', AddNodeMode_Mousemove_Handler, false)
+        this.canvas.addEventListener('mousedown', AddNodeMode_Mousedown_Handler, false)
+        this.canvas.addEventListener('mouseout', AddNodeMode_Mouseout_Handler, false)
+        this.canvas.addEventListener('mouseup', AddNodeMode_Mouseup_Handler, false)   
+    }
+
+    Exit() {
+        console.log("AddNode_EditorMode.Exit()")
+        this.canvas.removeEventListener('mouseover', AddNodeMode_Mouseover_Handler, false)
+        this.canvas.removeEventListener('mousemove', AddNodeMode_Mousemove_Handler, false)
+        this.canvas.removeEventListener('mousedown', AddNodeMode_Mousedown_Handler, false)
+        this.canvas.removeEventListener('mouseout', AddNodeMode_Mouseout_Handler, false)
+        this.canvas.removeEventListener('mouseup', AddNodeMode_Mouseup_Handler, false)   
+    }
+
+}
+
+
+
+class AddEdge_EditorMode extends EditorMode{
+    constructor(canvas) {
+        super()
+        this.canvas = canvas
+
+    }
+
+    Enter() {
+        console.log("AddEdge_EditorMode.Enter()")
+        this.canvas.addEventListener('mouseover', AddEdgeMode_Mouseover_Handler, false)
+        this.canvas.addEventListener('mousedown', AddEdgeMode_Mousedown_Handler, false)
+        this.canvas.addEventListener('mousemove', AddEdgeMode_Mousemove_Handler, false)
+        this.canvas.addEventListener('mouseout', AddEdgeMode_Mouseout_Handler, false)
+        this.canvas.addEventListener('mouseup', AddEdgeMode_Mouseup_Handler, false)        
+   }
+
+    Exit() {
+        console.log("AddEdge_EditorMode.Exit()")
+        this.canvas.removeEventListener('mouseover', AddEdgeMode_Mouseover_Handler, false)
+        this.canvas.removeEventListener('mousedown', AddEdgeMode_Mousedown_Handler, false)
+        this.canvas.removeEventListener('mousemove', AddEdgeMode_Mousemove_Handler, false)
+        this.canvas.removeEventListener('mouseout', AddEdgeMode_Mouseout_Handler, false)
+        this.canvas.removeEventListener('mouseup', AddEdgeMode_Mouseup_Handler, false)      
+    }
+
+}
+
+
+// -----------------------------------------------------------------------
+
+
 class Editor {
     constructor(canvas, design, diagram) {
         this.canvas = canvas
@@ -21,52 +123,27 @@ class Editor {
         this.diagram = diagram
     }
 
-    EnterSelectMode() {
-        console.log("EnterSelectMode()")
-        // this.canvas.addEventListener('click', SelectModeClickHandler, false)
-        this.canvas.addEventListener('mouseover', SelectMode_Mouseover_Handler, false)
-        this.canvas.addEventListener('mousedown', SelectMode_Mousedown_Handler, false)
-        this.canvas.addEventListener('mouseout', SelectMode_Mouseout_Handler, false)
-        this.canvas.addEventListener('mouseup', SelectMode_Mouseup_Handler, false)        
+    SetMode(mode) {
+        this.nextMode = mode
+
+        if (this.currentMode) {
+            this.currentMode.Exit()
+        }
+
+        this.currentMode = this.nextMode;
+        this.currentMode.Enter()
+}
+
+    SetMode_Select() {
+        this.SetMode(new Select_EditorMode(this.canvas))
     }
 
-    ExitSelectMode() {
-        console.log("ExitSelectMode()")
-        // this.canvas.removeEventListener('click', SelectModeClickHandler, false)
-        this.canvas.removeEventListener('mouseover', SelectMode_Mouseover_Handler, false)
-        this.canvas.removeEventListener('mousedown', SelectMode_Mousedown_Handler, false)
-        this.canvas.removeEventListener('mouseout', SelectMode_Mouseout_Handler, false)
-        this.canvas.removeEventListener('mouseup', SelectMode_Mouseup_Handler, false)
+    SetMode_AddNode() {
+        this.SetMode(new AddNode_EditorMode(this.canvas))
     }
 
-    EnterAddNodeMode() {
-        console.log("EnterAddNodeMode()")
-        // this.canvas.addEventListener('click', AddNodeMode_ClickHandler, false)
-        this.canvas.addEventListener('mouseover', AddNodeMode_Mouseover_Handler, false)
-        this.canvas.addEventListener('mousedown', AddNodeMode_Mousedown_Handler, false)
-        this.canvas.addEventListener('mouseout', AddNodeMode_Mouseout_Handler, false)
-        this.canvas.addEventListener('mouseup', AddNodeMode_Mouseup_Handler, false)        
-    }
-
-    ExitAddNodeMode() {
-        console.log("ExitAddNodeMode()")
-        this.canvas.removeEventListener('click', AddNodeModeClickHandler, false)
-    }
-
-    EnterAddEdgeMode() {
-        console.log("EnterAddEdgeMode()")
-        // this.canvas.addEventListener('mouseover', AddEdgeMode_Mousedown_Handler, false)
-        // this.canvas.addEventListener('mousedown', AddEdgeMode_Mousedown_Handler, false)
-        // this.canvas.addEventListener('mouseout', AddEdgeMode_Mouseup_Handler, false)
-        // this.canvas.addEventListener('mouseup', AddEdgeMode_Mouseup_Handler, false)
-    }
-
-    ExitAddEdgeMode() {
-        console.log("ExitAddEdgeMode()")
-        // this.canvas.addEventListener('mouseover', AddEdgeMode_Mousedown_Handler, false)
-        // this.canvas.addEventListener('mousedown', AddEdgeMode_Mousedown_Handler, false)
-        // this.canvas.addEventListener('mouseout', AddEdgeMode_Mouseup_Handler, false)
-        // this.canvas.addEventListener('mouseup', AddEdgeMode_Mouseup_Handler, false)
+    SetMode_AddEdge() {
+        this.SetMode(new AddEdge_EditorMode(this.canvas))
     }
 }
 
@@ -74,54 +151,29 @@ class Editor {
 
 var editor = new Editor(document.getElementById("diagram_canvas"), designModel, designView)
 
-function SelectModeClickHandler(ev) {
-    console.log("SelectModeClickHandler()")
-    var mousePos = getMousePos(editor.canvas, ev)
-    console.log(mousePos.x + ' ' + mousePos.y + ' ' + ev.clientX + ' ' + ev.clientY)
-}
 
 // ---------------------------------------------------------------------------
 
-function SelectMode_Mouseover_Handler() {
-    console.log("SelectMode_Mouseover_Handler()")
-}
-
-function SelectMode_Mousedown_Handler() {
-    console.log("SelectMode_Mousedown_Handler()")
-
-}
-
-function SelectMode_Mouseout_Handler() {
-    console.log("SelectMode_Mouseout_Handler()")
-
-}
-
-function SelectMode_Mouseup_Handler() {
-    console.log("SelectMode_Mouseup_Handler()")
-}
-
-// ---------------------------------------------------------------------------
-
-function AddNodeMode_Mouseover_Handler() {
+function AddNodeMode_Mouseover_Handler(ev) {
     console.log("AddNodeMode_Mouseover_Handler()")
 }
 
-function AddNodeMode_Mousedown_Handler() {
+
+function AddNodeMode_Mousemove_Handler(ev) {
+    console.log("AddNodeMode_Mousemove_Handler()")
+}
+
+function AddNodeMode_Mousedown_Handler(ev) {
     console.log("AddNodeMode_Mousedown_Handler()")
 }
 
-function AddNodeMode_Mouseout_Handler() {
+function AddNodeMode_Mouseout_Handler(ev) {
     console.log("AddNodeMode_Mouseout_Handler()")
 }
 
-function AddNodeMode_Mouseup_Handler() {
+function AddNodeMode_Mouseup_Handler(ev) {
     console.log("AddNodeMode_Mouseup_Handler()")
-}
 
-// ---------------------------------------------------------------------------
-
-function AddNodeModeClickHandler(ev) {
-    console.log("AddNodeModeClickHandler()")
     var mousePos = getMousePos(editor.canvas, ev)
     console.log(mousePos.x + ' ' + mousePos.y + ' ' + ev.clientX + ' ' + ev.clientY)
     var id = uuidv1()
@@ -129,22 +181,56 @@ function AddNodeModeClickHandler(ev) {
     designModel.AddNode(newNode)
     designView.SetData(designModel.GetNodes())
     designView.RedrawImage()
+
 }
 
-function AddEdgeModeClickHandler(ev) {
-    console.log("AddEdgeModeClickHandler()")
-    var mousePos = getMousePos(editor.canvas, ev)
-    console.log(mousePos.x + ' ' + mousePos.y + ' ' + ev.clientX + ' ' + ev.clientY)
-    var id = uuidv1()
-    var newNode = {id: id, label: id, x: mousePos.x, y: mousePos.y}
-    designModel.AddNode(newNode)
-    designView.SetData(designModel.GetNodes())
-    designView.RedrawImage()
+
+// ---------------------------------------------------------------------------
+
+
+function AddEdgeMode_Mouseover_Handler(ev) {
+    console.log("AddEdgeMode_Mouseover_Handler()")
+}
+
+function AddEdgeMode_Mousemove_Handler(ev) {
+    console.log("AddEdgeMode_Mousemove_Handler()")
+}
+
+function AddEdgeMode_Mousedown_Handler(ev) {
+    console.log("AddEdgeMode_Mousedown_Handler()")
+
+    console.log("Mouse Down")
+    console.log(" - Can we initiate a 'interaction' mode for drawing lines?")
+
+}
+
+function AddEdgeMode_Mouseout_Handler(ev) {
+    console.log("AddEdgeMode_Mouseout_Handler()")
+
+}
+
+function AddEdgeMode_Mouseup_Handler(ev) {
+    console.log("AddEdgeMode_Mouseup_Handler()")
+
+    // var mousePos = getMousePos(editor.canvas, ev)
+    // console.log(mousePos.x + ' ' + mousePos.y + ' ' + ev.clientX + ' ' + ev.clientY)
+    // var id = uuidv1()
+    // var newNode = {id: id, label: id, x: mousePos.x, y: mousePos.y}
+    // designModel.AddNode(newNode)
+    // designView.SetData(designModel.GetNodes())
+    // designView.RedrawImage()
+
+    console.log("Mouse Up")
+    console.log(" - Can we finish the drawing lines 'interaction' mode?")
 }
 
 // ---------------------------------------------------------------------------
+
 
 export {
-    Editor, editor
+    Editor, 
+    editor
+    // Select_EditorMode,
+
 }
 

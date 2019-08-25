@@ -19,6 +19,7 @@ class DesignModel {
 
     AddNode(params) {
         console.log("Add Node To DesignModel")
+        
         this.nodes.push({
             id: uuidv1(),
             label: params.label,
@@ -29,6 +30,7 @@ class DesignModel {
 
     AddEdge(params) {
         console.log("Add Edge To DesignModel")
+
         this.edges.push({
             id: uuidv1(),
             label: params.label,

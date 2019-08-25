@@ -12,27 +12,22 @@ require("jquery")
 var selectButton = document.getElementById("select_button")
 selectButton.addEventListener('click', function (ev){
     console.log("Event: Select Button Click")
-    editor.ExitAddNodeMode()
-    editor.EnterSelectMode()
+    editor.SetMode_Select()
 }, false)
 
 var addNodeButton = document.getElementById("addnode_button")
 addNodeButton.addEventListener('click', function (ev){
     console.log("Event: Add Node Button Click")
-    editor.ExitSelectMode()
-    editor.EnterAddNodeMode()
+    editor.SetMode_AddNode()
 }, false)
-
-// ---------------------------------------------------------------------------
 
 var addEdgeButton = document.getElementById("addedge_button")
 addEdgeButton.addEventListener('click', function (ev){
     console.log("Event: Add Edge Button Click")
-    editor.ExitSelectMode()
-    editor.ExitAddNodeMode()
-    editor.EnterAddEdgeMode()
-
+    editor.SetMode_AddEdge()
 }, false)
+
+// ---------------------------------------------------------------------------
 
 var dumpButton = document.getElementById("dump_button")
 dumpButton.addEventListener('click', function (ev){
@@ -41,24 +36,6 @@ dumpButton.addEventListener('click', function (ev){
     editor.ExitAddNodeMode()
 
     console.log(designModel.Serialise())
-}, false)
-
-// ---------------------------------------------------------------------------
-
-
-
-// ---------------------------------------------------------------------------
-
-var updateImageDataButton = document.getElementById("updateimagedata_button")
-updateImageDataButton.addEventListener('click', function (ev){
-    console.log("Event: Update Image Data Button Click")
-    // designView.SetData(designModel.GetNodes())
-}, false)
-
-var redrawImageButton = document.getElementById("redrawimage_button")
-redrawImageButton.addEventListener('click', function (ev){
-    console.log("Event: Redraw Image Button Click")
-    // designView.RedrawImage()
 }, false)
 
 // ---------------------------------------------------------------------------
