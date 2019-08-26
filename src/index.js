@@ -1,6 +1,5 @@
-import { DesignModel, designModel } from './designmodel';
-import { DesignView, designView } from './designview';
-import { Editor, editor } from './editor';
+import { DesignModel, designModel } from './designmodel';   // MODEL
+import { Editor, editor } from './editor';                  // PRESENTATION & INTERACTION
 
 // ---------------------------------------------------------------------------
 
@@ -32,9 +31,6 @@ addEdgeButton.addEventListener('click', function (ev){
 var dumpButton = document.getElementById("dump_button")
 dumpButton.addEventListener('click', function (ev){
     console.log("Event: Dump Button Click")
-    editor.ExitSelectMode()
-    editor.ExitAddNodeMode()
-
     console.log(designModel.Serialise())
 }, false)
 
