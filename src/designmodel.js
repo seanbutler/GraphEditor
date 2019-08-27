@@ -41,8 +41,7 @@ class DesignModel {
     }
 
     Serialise() {
-        return (JSON.stringify(this.nodes) + "\n"
-            + JSON.stringify(this.edges) + "\n")
+        return (JSON.stringify(this.nodes) + "\n" + JSON.stringify(this.edges) + "\n")
     }
 
 }

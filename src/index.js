@@ -17,14 +17,35 @@ selectButton.addEventListener('click', function (ev){
 var addNodeButton = document.getElementById("addnode_button")
 addNodeButton.addEventListener('click', function (ev){
     console.log("Event: Add Node Button Click")
-    editor.SetMode_AddNode()
+    // editor.SetMode_AddNode()
+    editor.AddNode()
+
 }, false)
 
 var addEdgeButton = document.getElementById("addedge_button")
 addEdgeButton.addEventListener('click', function (ev){
     console.log("Event: Add Edge Button Click")
-    editor.SetMode_AddEdge()
+    editor.JoinSelected()
 }, false)
+
+var removeButton = document.getElementById("remove_button")
+removeButton.addEventListener('click', function (ev){
+    console.log("Event: Remove Button Click")
+    editor.RemoveSelected()
+}, false)
+
+var restoreButton = document.getElementById("restore_button")
+restoreButton.addEventListener('click', function (ev){
+    console.log("Event: Restore Button Click")
+    editor.RestoreRemoved()
+}, false)
+
+var cloneButton = document.getElementById("clone_button")
+cloneButton.addEventListener('click', function (ev){
+    console.log("Event: Clone Button Click")
+    editor.CloneSelected()
+}, false)
+
 
 // ---------------------------------------------------------------------------
 
