@@ -8,18 +8,21 @@ require("jquery")
 
 // ---------------------------------------------------------------------------
 
+
 var selectButton = document.getElementById("select_button")
 selectButton.addEventListener('click', function (ev){
     console.log("Event: Select Button Click")
-    editor.SetMode_Select()
+}, false)
+
+var editButton = document.getElementById("edit_button")
+editButton.addEventListener('click', function (ev){
+    console.log("Event: Edit Button Click")
 }, false)
 
 var addNodeButton = document.getElementById("addnode_button")
 addNodeButton.addEventListener('click', function (ev){
     console.log("Event: Add Node Button Click")
-    // editor.SetMode_AddNode()
     editor.AddNode()
-
 }, false)
 
 var addEdgeButton = document.getElementById("addedge_button")
@@ -46,6 +49,11 @@ cloneButton.addEventListener('click', function (ev){
     editor.CloneSelected()
 }, false)
 
+var fitButton = document.getElementById("clone_button")
+fitButton.addEventListener('click', function (ev){
+    console.log("Event: Fit Button Click")
+    editor.CloneSelected()
+}, false)
 
 // ---------------------------------------------------------------------------
 

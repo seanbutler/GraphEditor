@@ -17,26 +17,46 @@ class Editor {
             style: cytoscape.stylesheet()
             .selector('node')
                 .css({
-                    // 'shape': 'ellipse',
-                    'width': '50',
-                    'height': '50',
                     'content': 'data(name)',
                     'text-valign': 'center',
-                    // 'text-outline-width': 2,
-                    // 'text-outline-color': '#FF7700',
-                    // 'background-color': '#FF7700',
-                    // 'color': '#fff'
-                }),
+                    'text-outline-width': 2,
+                    'text-outline-color': '#777777',
+                    'background-color': '#777777',
+                    'color': '#fff',
+                })
 
-            // layout: {
-            //     name: 'grid',
-            //     rows: 1
-            // }
+            .selector(':selected')
+                .css({
+                    'border-width': 3,
+                    'border-color': '#333',                    
+                })             
+                
+            .selector('edge')
+                .css({
+                    'content': 'data(name)',
+                    'text-valign': 'center',
+                    'text-outline-width': 2,
+                    'text-outline-color': '#777777',
+                    'background-color': '#777777',
+                    'color': '#fff'
+                })
+
+            .selector(':selected')
+                .css({
+                    'border-width': 3,
+                    'border-color': '#333',
+                }),
+            layout: {
+                name: 'grid',
+                rows: 1
+            },
+
+            wheelSensitivity: 0.333,
 
         });
 
-        this.canvas.width = 1200
-        this.canvas.height = 1200
+        this.canvas.width = 800
+        this.canvas.height = 800
 
         this.cy.boxSelectionEnabled(true)
     }
@@ -45,7 +65,7 @@ class Editor {
         this.cy.add({
             group: 'nodes',
             data: { name: 'new node' },
-            position: { x: 200, y: 200 }
+            // position: { x: 200, y: 200 }
         });
 
         this.cy.fit()
@@ -62,17 +82,14 @@ class Editor {
 
     CloneSelected() {
 
-        var selection = this.cy.elements(':selected').clone()
+        var selection = this.cy.elements(':selected')
         var selectedElementsJSON = this.cy.json(selection).elements
-        console.log(selectedElementsJSON)
+        // console.log(selectedElementsJSON)
 
         for(var n = 0; n < selectedElementsJSON.length; n++) {
             selectedElementsJSON[n].data.id = uuidv1()
         }
-        console.log(selectedElementsJSON)
-
         this.cy.add(selectedElementsJSON)
-        // this.cy.fit()
     }
 
     JoinSelected() {
@@ -110,7 +127,6 @@ function getMousePos(canvas, evt) {
         y: evt.clientY - rect.top
     };
 }
-
 
 function jsonCopy(src) {
     return JSON.parse(JSON.stringify(src));
