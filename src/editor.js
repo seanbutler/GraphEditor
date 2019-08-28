@@ -8,44 +8,26 @@ var cytoscape = require('cytoscape');
 class Editor {
     constructor(element) {
         this.canvas = element
-
+        this.layout = {} 
         var ids = [uuidv1(),uuidv1(), uuidv1()]
         this.cy = cytoscape({
 
             container: this.canvas,
-
-            style: cytoscape.stylesheet()
-            .selector('node')
-                .css({
-                    'content': 'data(name)',
-                    'text-valign': 'center',
-                    'text-outline-width': 2,
-                    'text-outline-color': '#777777',
-                    'background-color': '#777777',
-                    'color': '#fff',
-                })
-
-            .selector(':selected')
-                .css({
-                    'border-width': 3,
-                    'border-color': '#333',                    
-                })             
-                
-            .selector('edge')
-                .css({
-                    'content': 'data(name)',
-                    'text-valign': 'center',
-                    'text-outline-width': 2,
-                    'text-outline-color': '#777777',
-                    'background-color': '#777777',
-                    'color': '#fff'
-                })
-
-            .selector(':selected')
-                .css({
-                    'border-width': 3,
-                    'border-color': '#333',
-                }),
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'content': 'data(name)'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'content': 'data(name)',
+                        'curve-style': 'bezier',
+                    }
+                }
+            ],
             layout: {
                 name: 'grid',
                 rows: 1
@@ -69,7 +51,6 @@ class Editor {
         });
 
         this.cy.fit()
-
     }
 
     RemoveSelected() {
@@ -81,7 +62,6 @@ class Editor {
     }
 
     CloneSelected() {
-
         var selection = this.cy.elements(':selected')
         var selectedElementsJSON = this.cy.json(selection).elements
         // console.log(selectedElementsJSON)
@@ -107,11 +87,16 @@ class Editor {
                 }
             })
         }
-
         this.cy.add(newEdges)
     }    
 
+    SetLayout(options) {
+        this.layout = this.cy.elements().layout(options);
+    }
 
+    ApplyLayout(options) {
+        this.layout.run();
+    }
 }
 
 // ---------------------------------------------------------------------------
