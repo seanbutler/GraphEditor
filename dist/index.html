@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Game Design Editor</title>
+  <title>Graph Editor</title>
   <link rel="stylesheet" type="text/css" href="bootstrap.min.css" media="screen" />
-  <script src="https://unpkg.com/webcola/WebCola/cola.min.js"></script>
+  <!-- <script src="https://unpkg.com/webcola/WebCola/cola.min.js"></script> -->
   <!-- <link rel="stylesheet" type="text/css" href="monotony_theme.css" media="screen" /> -->
 </head>
 
@@ -20,25 +20,19 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <!-- <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li> -->
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             File
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item disabled" href="#">New</a>
-            <a class="dropdown-item disabled" href="#">Open</a>
+            <a class="dropdown-item" href="#">New</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item disabled" href="#">Save</a>
-            <a class="dropdown-item disabled" href="#">Save As</a>
+            <a class="dropdown-item" id = "uploadJSON_menuitem" href="#">Upload JSON</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item disabled" href="#">Quit</a>
+            <a class="dropdown-item" id = "downloadJSON_menuitem" href="#">Download JSON</a>
+            <a class="dropdown-item disabled" id = "downloadPNG_menuitem" href="#">Download PNG</a>
+            <a class="dropdown-item disabled" id = "downloadJPEG_menuitem" href="#">Download JPEG</a>
           </div>
         </li>
 
@@ -67,49 +61,44 @@
             <a class="dropdown-item" id = "randomlayout_menuitem" href="#">Random</a>
           </div>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Grid
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item disabled" id = "coselayout_menuitem" href="#">Show</a>
+            <a class="dropdown-item disabled" id = "gridlayout_menuitem" href="#">Hide</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled" id = "circlelayout_menuitem" href="#">Snap</a>
+          </div>
+        </li>
       </ul>
     </div>
   </nav>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- <a class="navbar-brand" href="#">Graph Editor</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-  
-
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-
 
   <main role="main" class="container-fluid">
 
     <div class="row">
       <div class="col-2">
-        <div class="card">
-          <div class="card-body d-flex flex-column">
-            <h1 class="display-2 text-primary"><span class="ion ion-ios-snow-outline"></span></h1>
-            <h4 class="card-title text-primary">Actions</h4>
-            <button id="select_button" type="button" class="btn btn-outline-primary btn-block">Select</button>
-            <button id="edit_button" type="button" class="btn btn-outline-primary btn-block">Edit</button>
-            <button id="addnode_button" type="button" class="btn btn-outline-primary btn-block">Add Node</button>
-            <button id="remove_button" type="button" class="btn btn-outline-primary btn-block">Delete</button>
-            <button id="restore_button" type="button" class="btn btn-outline-primary btn-block">Undelete</button>
-            <button id="addedge_button" type="button" class="btn btn-outline-primary btn-block">Join Selected</button>
-            <button id="clone_button" type="button" class="btn btn-outline-primary btn-block">Clone Selected</button>
-            <button id="dump_button" type="button" class="btn btn-outline-primary btn-block">Dump</button>
+        <div class="card h-100 flex-grow">
+          <div class="card-body d-flex flex-column align-items-start">
+            <div class="btn-group-vertical">
+
+              <button id="addnode_button" type="button" class="btn btn-lg btn-outline-primary btn-block">Add Node</button>
+              <button id="remove_button" type="button" class="btn btn-lg btn-outline-primary btn-block">Delete</button>
+              <button id="restore_button" type="button" class="btn btn-lg btn-outline-primary btn-block">Undelete</button>
+              <button id="addedge_button" type="button" class="btn btn-lg btn-outline-primary btn-block">Join Selected</button>
+              <button id="clone_button" type="button" class="btn btn-lg btn-outline-primary btn-block">Clone Selected</button>
+              <button id="dump_button" type="button" class="btn btn-lg btn-outline-primary btn-block">Dump</button>
+
+            </div>
+
           </div>
         </div>
       </div>
 
-      <div class="col-10">
+      <div class="col-8">
         <div class="card h-100 flex-grow">
           <div class="card-body d-flex flex-column align-items-start">
             <!-- <h4 class="card-title text-primary">Card Outline</h4>
@@ -119,25 +108,40 @@
             <div id="diagram_canvas" style="width: 100%; height: 1200px">
             </div>
 
+            <input type="file"
+            id="avatar" name="avatar"
+            accept="image/png, image/jpeg">
+
+
           </div>
         </div>
       </div>
 
-      <!-- <div class="col-2">
-        <div class="card">
-          <div class="card-body d-flex flex-column align-items-start">
-            <h4 class="card-title text-primary">Info Box</h4>
-            <p class="card-text">
-              With supporting text below as a natural lead-in to additional content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div> -->
-
     </div>
 
   </main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="nodeInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 </body>

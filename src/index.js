@@ -1,22 +1,19 @@
-import { DesignModel, designModel } from './designmodel';   // MODEL
+import { download } from './utils';
 import { Editor, editor } from './editor';                  // PRESENTATION & INTERACTION
+var FileSaver = require('file-saver');
 
+;
 // ---------------------------------------------------------------------------
+
 
 require('bootstrap')
 require("jquery")
 
 // ---------------------------------------------------------------------------
 
-var selectButton = document.getElementById("select_button")
-selectButton.addEventListener('click', function (ev) {
-    console.log("Event: Select Button Click")
-}, false)
-
-var editButton = document.getElementById("edit_button")
-editButton.addEventListener('click', function (ev) {
-    console.log("Event: Edit Button Click")
-}, false)
+//
+// Action Buttons and Menu Items
+//
 
 var addNodeButton = document.getElementById("addnode_button")
 addNodeButton.addEventListener('click', function (ev) {
@@ -59,7 +56,6 @@ fitButton.addEventListener('click', function (ev) {
 var dumpButton = document.getElementById("dump_button")
 dumpButton.addEventListener('click', function (ev) {
     console.log("Event: Dump Button Click")
-    console.log(designModel.Serialise())
 }, false)
 
 // ---------------------------------------------------------------------------
@@ -170,14 +166,14 @@ concentricLayoutMenuItem.addEventListener('click', function (ev) {
         height: undefined,              // height of layout area (overrides container height)
         width: undefined,               // width of layout area (overrides container width)
         spacingFactor: 2.0,             // Applies a multiplicative factor (>0) to expand or compress the overall area that the nodes take up
-        concentric: function (node) {    return node.degree(); },  // returns numeric value for each node, placing higher nodes in levels towards the centre
-        levelWidth: function (nodes) {    return nodes.maxDegree() / 4;  },// the letiation of concentric values in each level
+        concentric: function (node)     { return node.degree(); },  // returns numeric value for each node, placing higher nodes in levels towards the centre
+        levelWidth: function (nodes)    { return nodes.maxDegree() / 4;  },// the letiation of concentric values in each level
         animate: true,                  // whether to transition the node positions
         animationDuration: 1500,        // duration of animation in ms if enabled
         animationEasing: undefined,     // easing of animation if enabled
         animateFilter: function (node, i) { return true; }, // a function that determines whether the node should be animated.  All nodes animated by default on animate enabled.  Non-animated nodes are positioned immediately when the layout starts
-        ready: undefined, // callback on layoutready
-        stop: undefined, // callback on layoutstop
+        ready: undefined,               // callback on layoutready
+        stop: undefined,                // callback on layoutstop
         transform: function (node, position) { return position; } // transform a given node position. Useful for changing flow direction in discrete layouts
     };
 
@@ -209,11 +205,11 @@ coseLayoutMenuItem.addEventListener('click', function (ev) {
         // Non-animated nodes are positioned immediately when the layout starts
         animateFilter: function (node, i) { return true; },
         animationThreshold: 250,    // The layout animates only after this many milliseconds for animate:true (prevents flashing on fast runs)
-        refresh: 20,                // Number of iterations between consecutive screen positions update
+        refresh: 3,                 // Number of iterations between consecutive screen positions update
         fit: true,                  // Whether to fit the network view after when done
         padding: 30,                // Padding on fit
         boundingBox: undefined,     // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-        nodeDimensionsIncludeLabels: false,   // Excludes the label when calculating node bounding boxes for the layout algorithm
+        nodeDimensionsIncludeLabels: true,   // Excludes the label when calculating node bounding boxes for the layout algorithm
         randomize: false,           // Randomize the initial positions of the nodes (true) or use existing positions (false)
         componentSpacing: 40,       // Extra spacing between components in non-compound graphs
         nodeRepulsion: function (node) { return 2048; },  // Node repulsion (non overlapping) multiplier
@@ -233,3 +229,56 @@ coseLayoutMenuItem.addEventListener('click', function (ev) {
 }, false)
 
 // ---------------------------------------------------------------------------
+
+//
+// View / Edit 
+//
+
+function ShowNodeInfoDialog() {
+    console.log("ShowNodeInfoDialog")
+    document.getElementById('nodeInfoCard').style.display = 'block';
+}
+
+function HideNodeInfoDialog() {
+    console.log("HideNodeInfoDialog")
+    document.getElementById('nodeInfoCard').style.display = 'none';
+}
+
+function ToggleNodeInfoDialog() {
+    console.log('ToggleNodeInfoDialog')
+
+    if (document.getElementById(id).style.display == 'block') {
+        document.getElementById(id).style.display = 'none'
+    } else {
+        document.getElementById(id).style.display = 'block'
+    }
+} 
+
+// ---------------------------------------------------------------------------
+
+//
+// File Save and Load Dialogs
+//
+
+var uploadMenuItem = document.getElementById("uploadJSON_menuitem")
+uploadMenuItem.addEventListener('click', function (ev) {
+    console.log("Event: File Open Menu Item Click")
+    
+    // WORKING HERE
+
+
+    // SHOW D&D DIALOG
+
+
+})
+
+var downloadJSONMenuItem = document.getElementById("downloadJSON_menuitem")
+downloadJSONMenuItem.addEventListener('click', function (ev) {
+    console.log("Event: File Save JSON Menu Item Click")
+
+    var dataToSave = JSON.stringify(editor.cy.json(), null, 4)
+    download("graph.json", dataToSave)
+
+}, false)
+
+

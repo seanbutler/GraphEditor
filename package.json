@@ -12,8 +12,12 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "cytoscape": "^3.9.1",
+    "file-dialog": "0.0.7",
+    "fine-uploader": "^5.16.2",
     "graphology": "^0.14.1",
+    "handlebars": "^4.1.2",
     "jquery": "^3.4.1",
+    "open-file-dialog": "^1.0.1",
     "popper.js": "^1.15.0",
     "save-file": "^2.3.1",
     "uuid": "^3.3.3",

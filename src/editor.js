@@ -1,15 +1,20 @@
-import { DesignModel, designModel } from './designmodel';
+import Textview_Component from './components.js'
 
-const uuidv1 = require('uuid/v1');
-var cytoscape = require('cytoscape');
+const uuidv1 = require('uuid/v1')
+var cytoscape = require('cytoscape')
 
 // ---------------------------------------------------------------------------
 
+
+
+// ---------------------------------------------------------------------------
+
+
 class Editor {
-    constructor(element) {
+    constructor(element, toggleNodeInfoDialogFunc) {
         this.canvas = element
-        this.layout = {} 
-        var ids = [uuidv1(),uuidv1(), uuidv1()]
+        this.layout = {}
+        var ids = [uuidv1(), uuidv1(), uuidv1()]
         this.cy = cytoscape({
 
             container: this.canvas,
@@ -29,11 +34,11 @@ class Editor {
                 }
             ],
             layout: {
-                name: 'grid',
-                rows: 1
+                name: 'random',
+                // rows: 1
             },
 
-            wheelSensitivity: 0.333,
+            wheelSensitivity: 0.25,
 
         });
 
@@ -41,6 +46,33 @@ class Editor {
         this.canvas.height = 800
 
         this.cy.boxSelectionEnabled(true)
+
+        // this.cy.on('tap', function (event) {
+        //     HandleBackgroundEvent(event, this)
+        // });
+
+        // this.cy.on('tap', 'node', function (evt) {
+        //     var target = evt.target;
+        //     console.log('node tapped ' + target.id());
+        //     document.getElementById('nodeInfoCard').style.display = 'block'
+        // });
+
+        this.cy.on('tap', 'edge', function (evt) {
+            var target = evt.target;
+            console.log('edge tapped ' + target.id());
+            document.getElementById('edgeInfoCard').style.display = 'block'
+        });
+    }
+
+
+    HandleBackgroundEvent(event) {
+        var evtTarget = event.target;
+    
+        if (evtTarget === this.cy) {
+            console.log('tap on background');
+            document.getElementById('edgeInfoCard').style.display = 'none'
+            document.getElementById('nodeInfoCard').style.display = 'none'
+        }
     }
 
     AddNode() {
@@ -66,7 +98,7 @@ class Editor {
         var selectedElementsJSON = this.cy.json(selection).elements
         // console.log(selectedElementsJSON)
 
-        for(var n = 0; n < selectedElementsJSON.length; n++) {
+        for (var n = 0; n < selectedElementsJSON.length; n++) {
             selectedElementsJSON[n].data.id = uuidv1()
         }
         this.cy.add(selectedElementsJSON)
@@ -76,19 +108,19 @@ class Editor {
         var selectedElements = this.cy.$(':selected');
 
         var newEdges = []
-        for(var n = 1; n< selectedElements.length; n++) {
+        for (var n = 1; n < selectedElements.length; n++) {
             newEdges.push({
-                group : 'edges',
+                group: 'edges',
                 data: {
                     id: uuidv1(),
                     name: 'new edge',
-                    source: selectedElements[n-1].data('id'),
+                    source: selectedElements[n - 1].data('id'),
                     target: selectedElements[n].data('id')
                 }
             })
         }
         this.cy.add(newEdges)
-    }    
+    }
 
     SetLayout(options) {
         this.layout = this.cy.elements().layout(options);
@@ -97,11 +129,15 @@ class Editor {
     ApplyLayout(options) {
         this.layout.run();
     }
+
+    ShowTextViewComponent(doc, context) {
+        this.textviewComponent = new Textview_Component(doc, context)
+    }
 }
 
 // ---------------------------------------------------------------------------
 
-var editor = new Editor(document.getElementById("diagram_canvas"), designModel)
+var editor = new Editor(document.getElementById("diagram_canvas"))
 
 // ---------------------------------------------------------------------------
 
@@ -115,13 +151,14 @@ function getMousePos(canvas, evt) {
 
 function jsonCopy(src) {
     return JSON.parse(JSON.stringify(src));
-  }
+}
 
-  function bestCopyEver(src) {
+function bestCopyEver(src) {
     return Object.assign({}, src);
-  }
+}
 
 // ---------------------------------------------------------------------------
+
 
 export {
     Editor, editor

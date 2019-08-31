@@ -2,17 +2,29 @@
 
 __A Node-Edge Graph Editor in a webpage__
 
-![GraphEditor Screenshot 1](docs/GraphEditor_Screenshot_1.png)
+A generic graph editor.
+Made with cytoscape.js and other well known web technologies.
+
+Permissive licence to use.
 
 ## Status
 
-__v 0.1__
+__V 0.2__
 
-- Currently very basic and very incomplete.
-- Rudimentary graph editing in place.
-- Select from various included layouts.
+![GraphEditor Screenshot](docs/GraphEditor_Screenshot_v02.png)
 
+ - [ ] select node and edit data as json text
+ - [ ] select arc and edit data as json text
+ - [ ] save graph as local document
+ - [ ] load graph from local fs document
 
+__V 0.1__
+
+![GraphEditor Screenshot](docs/GraphEditor_Screenshot_v01.png)
+
+ - [x] Normal Bootstrap User Interface.
+ - [x] Rudimentary graph editing in place.
+ - [x] Select from various included layouts.
 
 ## Dependancies
 
