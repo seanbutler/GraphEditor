@@ -31,8 +31,8 @@
             <a class="dropdown-item" id = "uploadJSON_menuitem" href="#">Upload JSON</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" id = "downloadJSON_menuitem" href="#">Download JSON</a>
-            <a class="dropdown-item disabled" id = "downloadPNG_menuitem" href="#">Download PNG</a>
-            <a class="dropdown-item disabled" id = "downloadJPEG_menuitem" href="#">Download JPEG</a>
+            <a class="dropdown-item" id = "downloadPNG_menuitem" href="#">Download PNG</a>
+            <a class="dropdown-item" id = "downloadJPEG_menuitem" href="#">Download JPEG</a>
           </div>
         </li>
 
@@ -101,47 +101,58 @@
       <div class="col-8">
         <div class="card h-100 flex-grow">
           <div class="card-body d-flex flex-column align-items-start">
-            <!-- <h4 class="card-title text-primary">Card Outline</h4>
+            <h4 class="card-title text-primary">Card Outline</h4>
             <p class="card-text">
               Big Diagram of What you are making
-            </p> -->
+            </p>
             <div id="diagram_canvas" style="width: 100%; height: 1200px">
             </div>
-
-            <input type="file"
-            id="avatar" name="avatar"
-            accept="image/png, image/jpeg">
-
-
           </div>
         </div>
       </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="nodeInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+          <form class="box" method="post" action="" enctype="multipart/form-data">
+            <div class="box__input">
+              <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
+              <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+              <button class="box__button" type="submit">Upload</button>
+            </div>
+            <div class="box__uploading">Uploading&hellip;</div>
+            <div class="box__success">Done!</div>
+            <div class="box__error">Error! <span></span>.</div>
+          </form>
+  
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     </div>
 
   </main>
 
 
-<!-- Modal -->
-<div class="modal fade" id="nodeInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 </body>

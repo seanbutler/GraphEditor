@@ -257,7 +257,7 @@ function ToggleNodeInfoDialog() {
 // ---------------------------------------------------------------------------
 
 //
-// File Save and Load Dialogs
+// File Load, Save and Export
 //
 
 var uploadMenuItem = document.getElementById("uploadJSON_menuitem")
@@ -266,9 +266,9 @@ uploadMenuItem.addEventListener('click', function (ev) {
     
     // WORKING HERE
 
+    
 
     // SHOW D&D DIALOG
-
 
 })
 
@@ -278,6 +278,30 @@ downloadJSONMenuItem.addEventListener('click', function (ev) {
 
     var dataToSave = JSON.stringify(editor.cy.json(), null, 4)
     download("graph.json", dataToSave)
+
+}, false)
+
+
+var downloadJPGMenuItem = document.getElementById("downloadJPEG_menuitem")
+downloadJPGMenuItem.addEventListener('click', function (ev) {
+    console.log("Event: File Save JPEG Menu Item Click")
+
+    var dataToSave = editor.cy.jpeg()
+    var filename = 'graph.jpeg'
+
+    FileSaver.saveAs(dataToSave, filename);
+
+}, false)
+
+
+var downloadPNGMenuItem = document.getElementById("downloadPNG_menuitem")
+downloadPNGMenuItem.addEventListener('click', function (ev) {
+    console.log("Event: File Save PNG Menu Item Click")
+
+    var dataToSave = editor.cy.png()
+    var filename = 'graph.png'
+
+    FileSaver.saveAs(dataToSave, filename);
 
 }, false)
 

@@ -1,7 +1,7 @@
 
 //   download("hello.txt","This is the content of my file :)");
 
-function download(filename, text) {
+function download(filename, text, attributes) {
 
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -23,7 +23,6 @@ function getMousePos(canvas, evt) {
       y: evt.clientY - rect.top
     };
   }
-
 
 
 //

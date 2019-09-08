@@ -13,6 +13,7 @@
     "bootstrap": "^4.3.1",
     "cytoscape": "^3.9.1",
     "file-dialog": "0.0.7",
+    "file-saver": "^2.0.2",
     "fine-uploader": "^5.16.2",
     "graphology": "^0.14.1",
     "handlebars": "^4.1.2",
