@@ -1,0 +1,192 @@
+{
+    "elements": {
+        "nodes": [
+            {
+                "data": {
+                    "name": "new node",
+                    "id": "299f7c94-2844-4462-9ce5-e978d3208b17"
+                },
+                "position": {
+                    "x": -17.885293947214343,
+                    "y": 19.9228164647056
+                },
+                "group": "nodes",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": false,
+                "classes": ""
+            },
+            {
+                "data": {
+                    "name": "new node",
+                    "id": "7f4267bc-126a-4d2e-9200-af2f52b70633"
+                },
+                "position": {
+                    "x": 140.96842105263158,
+                    "y": 121.38947368421053
+                },
+                "group": "nodes",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": false,
+                "classes": ""
+            },
+            {
+                "data": {
+                    "name": "new node",
+                    "id": "ae7231f0-208f-4ac8-afb3-c63bf671e035"
+                },
+                "position": {
+                    "x": -37.64210526315789,
+                    "y": 147.32631578947368
+                },
+                "group": "nodes",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": false,
+                "classes": ""
+            },
+            {
+                "data": {
+                    "name": "new node",
+                    "id": "6477aa25-de59-4ddb-913f-e6bac80c55c5"
+                },
+                "position": {
+                    "x": 170.94736842105266,
+                    "y": 16.126315789473686
+                },
+                "group": "nodes",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": false,
+                "classes": ""
+            }
+        ],
+        "edges": [
+            {
+                "data": {
+                    "id": "63bc61e1-d352-11e9-9401-bb1b5a4f7574",
+                    "name": "new edge",
+                    "source": "7f4267bc-126a-4d2e-9200-af2f52b70633",
+                    "target": "ae7231f0-208f-4ac8-afb3-c63bf671e035"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "group": "edges",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": true,
+                "classes": ""
+            },
+            {
+                "data": {
+                    "id": "63bc61e0-d352-11e9-9401-bb1b5a4f7574",
+                    "name": "new edge",
+                    "source": "299f7c94-2844-4462-9ce5-e978d3208b17",
+                    "target": "7f4267bc-126a-4d2e-9200-af2f52b70633"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "group": "edges",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": true,
+                "classes": ""
+            },
+            {
+                "data": {
+                    "id": "624a8260-d352-11e9-9401-bb1b5a4f7574",
+                    "name": "new edge",
+                    "source": "299f7c94-2844-4462-9ce5-e978d3208b17",
+                    "target": "ae7231f0-208f-4ac8-afb3-c63bf671e035"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "group": "edges",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": true,
+                "classes": ""
+            },
+            {
+                "data": {
+                    "id": "60c1bf80-d352-11e9-9401-bb1b5a4f7574",
+                    "name": "new edge",
+                    "source": "299f7c94-2844-4462-9ce5-e978d3208b17",
+                    "target": "6477aa25-de59-4ddb-913f-e6bac80c55c5"
+                },
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "group": "edges",
+                "removed": false,
+                "selected": false,
+                "selectable": true,
+                "locked": false,
+                "grabbable": true,
+                "pannable": true,
+                "classes": ""
+            }
+        ]
+    },
+    "style": [
+        {
+            "selector": "node",
+            "style": {
+                "label": "data(name)"
+            }
+        },
+        {
+            "selector": "edge",
+            "style": {
+                "label": "data(name)",
+                "curve-style": "bezier"
+            }
+        }
+    ],
+    "data": {},
+    "zoomingEnabled": true,
+    "userZoomingEnabled": true,
+    "zoom": 1.1928164697077908,
+    "minZoom": 1e-50,
+    "maxZoom": 1e+50,
+    "panningEnabled": true,
+    "userPanningEnabled": true,
+    "pan": {
+        "x": 251.09695709392355,
+        "y": 49.686627083421335
+    },
+    "boxSelectionEnabled": true,
+    "renderer": {
+        "name": "canvas"
+    },
+    "wheelSensitivity": 0.25
+}
