@@ -2,9 +2,7 @@ import { download } from './utils';
 import { Editor, editor } from './editor';                  // PRESENTATION & INTERACTION
 var FileSaver = require('file-saver');
 
-;
 // ---------------------------------------------------------------------------
-
 
 require('bootstrap')
 require("jquery")
@@ -104,7 +102,7 @@ gridLayoutMenuItem.addEventListener('click', function (ev) {
         animateFilter: function (node, i) { return true; }, // a function that determines whether the node should be animated.  All nodes animated by default on animate enabled.  Non-animated nodes are positioned immediately when the layout starts
         ready: undefined,               // callback on layoutready
         stop: undefined,                // callback on layoutstop
-        transform: function (node, position) { return position; } // transform a given node position. Useful for changing flow direction in discrete layouts 
+        transform: function (node, position) { return position; } // transform a given node position. Useful for changing flow direction in discrete layouts
     };
 
     editor.SetLayout(options)
@@ -138,7 +136,7 @@ circleLayoutMenuItem.addEventListener('click', function (ev) {
         animateFilter: function (node, i) { return true; }, // a function that determines whether the node should be animated.  All nodes animated by default on animate enabled.  Non-animated nodes are positioned immediately when the layout starts
         ready: undefined,               // callback on layoutready
         stop: undefined,                // callback on layoutstop
-        transform: function (node, position) { return position; } // transform a given node position. Useful for changing flow direction in discrete layouts 
+        transform: function (node, position) { return position; } // transform a given node position. Useful for changing flow direction in discrete layouts
     };
 
     editor.SetLayout(options)
@@ -231,7 +229,7 @@ coseLayoutMenuItem.addEventListener('click', function (ev) {
 // ---------------------------------------------------------------------------
 
 //
-// View / Edit 
+// View / Edit
 //
 
 function ShowNodeInfoDialog() {
@@ -252,7 +250,7 @@ function ToggleNodeInfoDialog() {
     } else {
         document.getElementById(id).style.display = 'block'
     }
-} 
+}
 
 // ---------------------------------------------------------------------------
 
@@ -260,17 +258,37 @@ function ToggleNodeInfoDialog() {
 // File Load, Save and Export
 //
 
+document.getElementById("dropArea").style.display = 'none'
+
+
 var uploadMenuItem = document.getElementById("uploadJSON_menuitem")
 uploadMenuItem.addEventListener('click', function (ev) {
     console.log("Event: File Open Menu Item Click")
-    
+
     // WORKING HERE
 
-    
+    document.getElementById("dropArea").style.display = 'block'
+
 
     // SHOW D&D DIALOG
 
 })
+
+
+document.getElementById("dropArea").addEventListener("drop", function dropHandler(ev) {
+    console.log('File(s) dropped');
+  }, false)
+
+document.getElementById("dropArea").addEventListener("dragover", function dragOverHandler(ev) {
+    console.log('File(s) in drop zone');
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
+}, false)
+
+
+
+
+
 
 var downloadJSONMenuItem = document.getElementById("downloadJSON_menuitem")
 downloadJSONMenuItem.addEventListener('click', function (ev) {
@@ -306,36 +324,3 @@ downloadPNGMenuItem.addEventListener('click', function (ev) {
 }, false)
 
 
-var dropArea = document.getElementById("dropArea")
-dropArea.addEventListener("drop", function dropHandler(ev) {
-    console.log('File(s) dropped');
-  
-    // Prevent default behavior (Prevent file from being opened)
-    ev.preventDefault();
-  
-    if (ev.dataTransfer.items) {
-      // Use DataTransferItemList interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-        // If dropped items aren't files, reject them
-        if (ev.dataTransfer.items[i].kind === 'file') {
-          var file = ev.dataTransfer.items[i].getAsFile();
-          console.log('... file[' + i + '].name = ' + file.name);
-        }
-      }
-    } else {
-      // Use DataTransfer interface to access the file(s)
-      for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-        console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
-      }
-    }
-  }, false
-)
-
-dropArea.addEventListener("dragover",
-
-  function dragOverHandler(ev) {
-    console.log('File(s) in drop zone'); 
-  
-    // Prevent default behavior (Prevent file from being opened)
-    ev.preventDefault();
-  }, false)
