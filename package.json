@@ -22,9 +22,9 @@
     "popper.js": "^1.15.0",
     "save-file": "^2.3.1",
     "uuid": "^3.3.3",
-    "webpack": "^4.39.2"
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
-    "webpack-cli": "^3.3.6"
+    "webpack-cli": "^5.0.1"
   }
 }
